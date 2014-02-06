@@ -1,0 +1,40 @@
+<div class="panel-group" id="accordion">
+<% var first = true; _.each(apis, function (api, key) { %>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= key %>">
+                <h4 class="panel-title">
+                    <%= api.name %>
+                </h4>
+            </a>
+        </div>
+            <div id="collapse<%= key %>" class="list-group collapse <% if (first === true) { %>in<% first = false; } %>">
+                <% _.each(api.api_map, function(map, key){ %>
+                    <a class="list-group-item">
+                        <h5 class="list-group-item-heading tooltipped"><%= map.url %></h5>
+                        <p class="list-group-item-text">
+                            <% _.each(map.methods, function(method, key) { %>
+                                <button class="methodLink tooltipped btn btn-xs btn-<% 
+                                    if (key === "get") { %>primary<% }
+                                    if (key === "post") { %>success<% }
+                                    if (key === "delete") { %>danger<% }
+                                    if (key === "put" || key === "patch") { %>warning<% }
+                                    %>"
+                                    data-url="<%= map.url %>"
+                                    data-method="<%= key %>"
+                                    data-api="<%= api.slug %>"
+                                    data-url-prefix="<%= api.url_prefix %>"
+                                    data-version="<%= api.version %>"
+                                    data-toggle="tooltip" data-placement="right"
+                                    title="<%= method.description %>"
+                                >
+                                    <%= key.toUpperCase() %>
+                                </button>
+                            <% }); %>
+                        </p>
+                    </a>
+                <% }); %>
+            </div>
+    </div>
+<% }) %>
+</div>

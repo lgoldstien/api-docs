@@ -1,3 +1,3 @@
 define(function (require, exports, module) {
-    exports.dms = require('/config/maps/dms.js')
+    exports.dmsV1 = require('/config/maps/dmsV1.js');
 });

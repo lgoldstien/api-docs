@@ -7,14 +7,16 @@ require.config({
         'app/src/api_response'
     ],
     shim: {
-        'app/main'          : ['underscore', 'bootstrap'],
-        'bootstrap'         : ['jquery']
+        'app/main'          : ['backbone', 'bootstrap'],
+        'bootstrap'         : ['jquery'],
+        'backbone'          : ['underscore']
     },
     paths: {
         text                : '/vendor/requirejs-plugins/lib/text',
         json                : '/vendor/requirejs-plugins/src/json',
         symposia            : '/vendor/symposia/dist/symposia',
         underscore          : '/vendor/lodash/dist/lodash.min',
+        backbone            : 'vendor/backbone/backbone',
         jquery              : '/vendor/jquery/jquery',
         alertify            : '/vendor/alertify/alertify.min',
         bootstrap           : '/vendor/bootstrap/dist/js/bootstrap'

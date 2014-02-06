@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3>
+        Request: <%= request.url %>
+        <span class="methodLink tooltipped btn btn-xs btn-<% 
+            if (request.method === "get") { %>primary<% }
+            if (request.method === "post") { %>success<% }
+            if (request.method === "delete") { %>danger<% }
+            if (request.method === "put" || request.method === "patch") { %>warning<% }
+            %>"
+        >
+            <%= request.method.toUpperCase() %>
+        </span>
+    </h3>
+    <form id="requestForm" role="form">
+        <% if (request.method_map.request.json) { %>
+        <fieldset>
+            <legend>JSON Fields</legend>
+            <% _.each(request.method_map.request.json , function (json, key) { %>
+                <div class="form-group">
+                    <label for="json_<%= json.name %>">
+                        <%= json.name.substr(0, 1).toUpperCase() + json.name.substr(1) %>
+                    </label>
+                    <input class="form-control request_json" name="json_<%= json.name %>" id="json_<%= json.name %>" value="<%= json.default %>">
+                </div>
+            <% }); %>
+        </fieldset>
+        <% } %>
+
+        <% if (request.method_map.request.params) { %>
+        <fieldset>
+            <legend>URL Parameters</legend>
+            <% _.each(request.method_map.request.params , function (param, key) { %>
+                <div class="form-group">
+                    <label for="param_<%= param.name %>">
+                        <%= param.name.substr(0, 1).toUpperCase() + param.name.substr(1) %>
+                    </label>
+                    <input class="form-control request_param" name="param_<%= param.name %>" id="param_<%= param.name %>" value="<%= param.default %>">
+                </div>
+            <% }); %>
+        </fieldset>
+        <% } %>
+
+        <div class="clearfix">
+            <button class="btn btn-primary pull-right" id="submitRequest">Submit Request</button>
+        </div>
+    </form>
+  </div>
+</div>

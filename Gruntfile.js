@@ -33,24 +33,11 @@ module.exports = function(grunt) {
                     'style/api.css': 'style/api.less'
                 }
             }
-        },
-        requirejs: {
-            compile: {
-                options: {
-                    baseUrl: ".",
-                    name: 'app/main',
-                    mainConfigFile: 'require.conf.js',
-                    stubModules: ['text', 'json'],
-                    insertRequire: ['app/main']
-                }
-            }
         }
     });
 
 
-    grunt.registerTask('default',['jshint','build:vendor','build:app','build:css']);
-    grunt.registerTask('build:vendor',['concat:vendor','uglify:vendor']);
-    grunt.registerTask('build:app',['requirejs','uglify:app']);
+    grunt.registerTask('default',['jshint','build:css']);
     grunt.registerTask('build:css',['less']);
 
 };

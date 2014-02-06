@@ -1,2 +1,5 @@
 @import "../vendor/bootstrap/dist/css/bootstrap.css";
 @import "../vendor/alertify/themes/alertify.bootstrap.css";
+#api_list{height:100%;}#api_list .panel-group{height:100%;}#api_list .panel-group a{cursor:pointer;}
+#api_list .panel-group p{margin-bottom:2px;}
+#api_request{margin-bottom:20px;}#api_request .panel{height:100%;}
