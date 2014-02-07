@@ -14,18 +14,18 @@ define( function (require) {
             },
             render: function () {
                 this.$el.html(_.template(__apiList, { apis: config.api }));
+
                 this.$el.find(".methodLink").click(function() {
                     sandbox.publish({
                         topic: config.events.API_REQUEST_LOAD,
                         data: {
-                            url: $(this).data('url'),
-                            method: $(this).data('method'),
-                            api: $(this).data('api'),
-                            version: $(this).data('version'),
-                            url_prefix: $(this).data('url-prefix')
+                            url: $(this).data('api_url'),
+                            method: $(this).data('api_method'),
+                            slug: $(this).data('api_slug')
                         }
                     });
                 });
+
                 this.$el.find('.tooltipped').tooltip();
             },
 

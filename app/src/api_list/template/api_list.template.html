@@ -20,11 +20,9 @@
                                     if (key === "delete") { %>danger<% }
                                     if (key === "put" || key === "patch") { %>warning<% }
                                     %>"
-                                    data-url="<%= map.url %>"
-                                    data-method="<%= key %>"
-                                    data-api="<%= api.slug %>"
-                                    data-url-prefix="<%= api.url_prefix %>"
-                                    data-version="<%= api.version %>"
+                                    data-api_url="<%= map.url %>"
+                                    data-api_method="<%= key %>"
+                                    data-api_slug="<%= api.slug %>"
                                     data-toggle="tooltip" data-placement="right"
                                     title="<%= method.description %>"
                                 >

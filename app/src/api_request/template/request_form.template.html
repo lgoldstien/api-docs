@@ -2,7 +2,7 @@
   <div class="panel-body">
     <h3>
         Request: <%= request.url %>
-        <span class="methodLink tooltipped btn btn-xs btn-<% 
+        <span class="label label-<% 
             if (request.method === "get") { %>primary<% }
             if (request.method === "post") { %>success<% }
             if (request.method === "delete") { %>danger<% }
@@ -12,16 +12,31 @@
             <%= request.method.toUpperCase() %>
         </span>
     </h3>
+    <p><%= request.description %></p>
+    <p><%= request.method_map.description %></p>
     <form id="requestForm" role="form">
+        <fieldset>
+            <div class="form-group">
+                <select class="form-control" name="site">
+                    <% _.each(request.sites, function (val) { %>
+                        <option value="<%= val %>"><%= val %></option>
+                    <% }) %>
+                </select>
+            </div>
+        </fieldset>
         <% if (request.method_map.request.json) { %>
         <fieldset>
             <legend>JSON Fields</legend>
             <% _.each(request.method_map.request.json , function (json, key) { %>
-                <div class="form-group">
+                <div class="form-group <% if (json.required === "true") { %>has-feedback has-warning<% } %>">
                     <label for="json_<%= json.name %>">
                         <%= json.name.substr(0, 1).toUpperCase() + json.name.substr(1) %>
+                        <% if (json.type) { %><small>Type: <%= json.type %></small><% } %>
                     </label>
-                    <input class="form-control request_json" name="json_<%= json.name %>" id="json_<%= json.name %>" value="<%= json.default %>">
+                    <input class="form-control request_json" name="<%= json.name %>" id="json_<%= json.name %>" value="<%= json.default %>">
+                    <% if (json.required === "true") { %>
+                        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                    <% } %>
                 </div>
             <% }); %>
         </fieldset>
@@ -31,11 +46,15 @@
         <fieldset>
             <legend>URL Parameters</legend>
             <% _.each(request.method_map.request.params , function (param, key) { %>
-                <div class="form-group">
+                <div class="form-group <% if (param.required === "true") { %>has-feedback has-warning<% } %>">
                     <label for="param_<%= param.name %>">
                         <%= param.name.substr(0, 1).toUpperCase() + param.name.substr(1) %>
+                        <% if (param.type) { %><small>Type: <%= param.type %></small><% } %>
                     </label>
-                    <input class="form-control request_param" name="param_<%= param.name %>" id="param_<%= param.name %>" value="<%= param.default %>">
+                    <input class="form-control request_param" name="<%= param.name %>" id="param_<%= param.name %>" value="<%= param.default %>">
+                    <% if (param.required === "true") { %>
+                        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                    <% } %>
                 </div>
             <% }); %>
         </fieldset>
